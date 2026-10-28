@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Hoard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+    <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png?v=2">
+    <link rel="icon" type="image/png" href="images/logo.png?v=2">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
+        <nav class="navbar" aria-label="Main Navigation">
+            <div class="logo">
+                <img id="logo-img" src="images/logo.png" alt="Hostel Hoard Logo">
+                <img id="logo-name" src="images/logo-name2.png" alt="Hostel Hoard">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#services" data-i18n="nav_services">Services</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="signin.html" class="btn" id="sign-in-btn" role="button" data-i18n="sign_in">Sign In</a>
+                <div class="cart-wrapper" id="cart-wrapper">
+                    <a href="#" class="btn" id="cart-btn" role="button" aria-label="Open Shopping Cart" aria-haspopup="dialog" aria-expanded="false">
+                        <img id="cart1" class="cart-image" src="images/cart.svg" alt="cart">
+                    </a>
+                    <span class="cart-badge" id="cart-badge" aria-live="polite">0</span>
+                    <div class="cart-dropdown" id="cart-dropdown" role="dialog" aria-label="Shopping Cart" aria-modal="false">
+                        <div class="cart-dropdown-header">
+                            <div class="cart-header-title">
+                                <span>🛒</span>
+                                <h3 data-i18n="your_cart">Your Cart</h3>
+                                <span class="cart-count-pill" id="cart-count-pill">0 items</span>
+                            </div>
+                            <button type="button" class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">&times;</button>
+                        </div>
+                        <div class="cart-dropdown-body" id="cart-dropdown-body">
+                            <!-- Items inserted dynamically by script.js -->
+                        </div>
+                        <div class="cart-dropdown-footer" id="cart-dropdown-footer">
+                            <div class="cart-subtotal-row">
+                                <span>Subtotal:</span>
+                                <span class="cart-subtotal-amount" id="cart-subtotal">&#8377;0.00</span>
+                            </div>
+                            <div class="cart-dropdown-actions">
+                                <button type="button" class="cart-action-btn cart-checkout-btn" id="cart-checkout-btn" data-i18n="checkout">Checkout</button>
+                                <button type="button" class="cart-action-btn cart-clear-btn" id="cart-clear-btn" data-i18n="clear_cart">Clear Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn" id="burger-btn" role="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu"><img src="images/hamburger-menu.svg"
+                        alt="menu"></a>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <ul class="mobile-nav-links">
+                <li><a href="#home" class="btn" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" class="btn" data-i18n="nav_about">About</a></li>
+                <li><a href="#services" class="btn" data-i18n="nav_services">Services</a></li>
+                <li><a href="#contact" class="btn" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+            <img class="mobile-menu-logo" id="mobile-menu-logo" src="images/logo-name.png" alt="Hostel Hoard">
+        </div>
+    </header>
+    <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
+    <main id="main-content">
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1 data-i18n="hero_title">Welcome to Hostel Hoard</h1>
+            <p data-i18n="hero_desc">Your one-stop solution for hostel neccessities at cheap prices.</p>
+            <a href="#products" class="btn" role="button" data-i18n="get_started">Get Started</a>
+        </div>
+    </section>
+    <section class="products" id="products">
+        <h2 data-i18n="featured_products">Featured Products</h2>
+        <div class="product-cards">
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/desk-organizer.jpg" alt="Desk Organizer">
+                <h3 class="product-name">Desk Organizer</h3>
+                <p class="product-description truncate">A useful desk organizer for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;199.00</span> <span class="original-price">&#8377;499.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/drawer.webp" alt="Storage Drawer">
+                <h3 class="product-name">Storage Drawer</h3>
+                <p class="product-description truncate">A handy drawer for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;399.00</span> <span class="original-price">&#8377;999.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/drying-rack.webp" alt="Cloth Drying Rack">
+                <h3 class="product-name">Cloth Drying Rack</h3>
+                <p class="product-description truncate">A convenient drying rack for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;299.00</span> <span class="original-price">&#8377;749.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/extension.webp" alt="Extension Board">
+                <h3 class="product-name">Extension Board</h3>
+                <p class="product-description truncate">A useful extension cord for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;199.00</span> <span class="original-price">&#8377;499.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/foldable-table.webp" alt="Foldable Study Table">
+                <h3 class="product-name">Foldable Study Table</h3>
+                <p class="product-description truncate">A convenient foldable table for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;479.00</span> <span class="original-price">&#8377;1,199.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/fridge.webp" alt="Mini Refrigerator">
+                <h3 class="product-name">Mini Refrigerator</h3>
+                <p class="product-description truncate">A useful fridge for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;3,599.00</span> <span class="original-price">&#8377;8,999.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/hanger.jpg" alt="Clothes Hangers">
+                <h3 class="product-name">Clothes Hangers (Pack of 10)</h3>
+                <p class="product-description truncate">A useful hanger for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;99.00</span> <span class="original-price">&#8377;249.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/induction.webp" alt="Induction Cooktop">
+                <h3 class="product-name">Induction Cooktop</h3>
+                <p class="product-description truncate">A useful induction cooker for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;1,079.00</span> <span class="original-price">&#8377;2,699.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/iron.jpg" alt="Electric Steam Iron">
+                <h3 class="product-name">Electric Steam Iron</h3>
+                <p class="product-description truncate">A useful iron for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;359.00</span> <span class="original-price">&#8377;899.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/kettle.webp" alt="Electric Kettle">
+                <h3 class="product-name">Electric Kettle</h3>
+                <p class="product-description truncate">A useful kettle for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;399.00</span> <span class="original-price">&#8377;999.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/lamp.jpg" alt="LED Study Lamp">
+                <h3 class="product-name">LED Study Lamp</h3>
+                <p class="product-description truncate">A useful lamp for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;279.00</span> <span class="original-price">&#8377;699.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+            <div class="card">
+                <div class="product-condition">
+                    <div class="condition-rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    <p class="condition-label">Product Condition</p>
+                </div>
+                <img src="images/laptop-stand.jpg" alt="Adjustable Laptop Stand">
+                <h3 class="product-name">Adjustable Laptop Stand</h3>
+                <p class="product-description truncate">A useful laptop stand for your hostel room.</p>
+                <p class="price"><span class="resale-price">&#8377;319.00</span> <span class="original-price">&#8377;799.00</span> <span class="discount-badge">60% OFF</span></p>
+                <a href="#" class="btn" role="button">Add to Cart</a>
+                <a href="#" class="btn" role="button">Buy Now</a>
+            </div>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <h2 data-i18n="services">Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <img src="images/sell.avif" alt="Sell items">
+                <h3>Sell Items</h3>
+                <p>Sell stuff that you dont need anymore to your peers and make some extra money.</p>
+            </div>
+            <div class="card">
+                <img src="images/discount.avif" alt="Discounted deals">
+                <h3>Cheap Deals</h3>
+                <p>Get the best deals on essential items at discounted prices.</p>
+            </div>
+            <div class="card">
+                <img src="images/buy.jpg" alt="Buy items">
+                <h3>Buy Items</h3>
+                <p>Buy items at affordable prices from your peers. You may even find unique items that you couldn't find
+                    elsewhere.</p>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <h2 data-i18n="about_us">About Us</h2>
+        <p>We are a community-driven platform that connects hostel residents with the best deals on essential items.</p>
+        <p>You can get all the necessary items for your hostel stay at affordable prices that your peers didnt need and
+            are willing to sell them for cheap.</p>
+        <p>
+            We provide a safe and secure platform for buying and selling items, ensuring that all transactions are
+            smooth and hassle-free. Our goal is to make hostel life more convenient and enjoyable for everyone.
+        </p>
+        <p>
+            We connect students and hostel residents, allowing them to buy and sell items easily. Our platform is
+            designed to be user-friendly, making it easy for anyone to list their items for sale or browse through
+            available products.
+        </p>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 data-i18n="contact_us">Contact Us</h2>
+        <p>If you have any questions or feedback, please feel free to reach out to us. We would love to hear from you!
+        </p>
+        <div class="contact-info">
+            <div class="contact-card" id="social-media">
+                <h3>Social Media</h3>
+                <p>Follow us on social media to stay updated with the latest deals and updates.</p>
+                <div>
+                    <a href="#" class="btn" role="button" aria-label="Visit Facebook">Facebook</a>
+                    <a href="#" class="btn" role="button" aria-label="Visit Instagram">Instagram</a>
+                    <a href="#" class="btn" role="button" aria-label="Visit Twitter">Twitter</a>
+                </div>
+
+            </div>
+            <div class="contact-card" id="email-whatsapp">
+                <h3>Email</h3>
+                <p>You can reach us via email for any inquiries or support.</p>
+                <div>
+                    <a href="mailto:info@hostelhoard.com" class="btn" role="button" aria-label="Send email to info@hostelhoard.com">Send Email</a>
+                </div>
+
+                <h3>WhatsApp</h3>
+                <p>Chat with us on WhatsApp for instant support and updates.</p>
+                <div>
+                    <a href="https://wa.me/1234567890" class="btn" role="button" aria-label="WhatsApp contact 1">1234567890</a>
+                    <a href="https://wa.me/1234567890" class="btn" role="button" aria-label="WhatsApp contact 2">1234567890</a>
+                </div>
+
+            </div>
+            <div class="contact-card" id="phone">
+                <h3>Phone</h3>
+                <p>Call us for any urgent inquiries or support.</p>
+                <div>
+                    <a href="tel:1234567890" class="btn" role="button" aria-label="Call 1234567890">1234567890</a>
+                </div>
+
+            </div>
+            <div class="contact-card" id="address">
+                <h3 data-i18n="address">Address</h3>
+                <p>Visit us at our office for any in-person inquiries or support.</p>
+                <p>BS12 Room 1302, Lovely Professional University, Phagwara, Punjab, India</p>
+            </div>
+        </div>
+
+    </section>
+    </main>
+    <footer role="contentinfo">
+        <div class="logo">
+            <img id="logo-img" src="images/logo.png" alt="Hostel Hoard Logo">
+        </div>
+        <p data-i18n="rights_reserved">&copy; 2024 Hostel Hoard. All rights reserved.</p>
+        <div class="language-selector">
+            <label for="lang-select" class="language-lable" data-i18n="lang_label">Languages:</label>
+            <select id="lang-select" class="language-selector" aria-label="Select Language" onchange="changeLanguage(this.value)">
+                <option value="en" selected>English</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ar">العربية (Arabic)</option>
+            </select>
+        </div>
+    </footer>
+</body>
+
+</html>

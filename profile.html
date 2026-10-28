@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Hoard - Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+    <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png?v=2">
+    <link rel="icon" type="image/png" href="images/logo.png?v=2">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
+        <nav class="navbar" aria-label="Main Navigation">
+            <div class="logo">
+                <img id="logo-img" src="images/logo.png" alt="Hostel Hoard Logo">
+                <img id="logo-name" src="images/logo-name2.png" alt="Hostel Hoard">
+            </div>
+            <ul class="nav-links">
+                <li><a href="main.html#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="main.html#about" data-i18n="nav_about">About</a></li>
+                <li><a href="main.html#services" data-i18n="nav_services">Services</a></li>
+                <li><a href="main.html#contact" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="cart-wrapper" id="cart-wrapper">
+                    <a href="#" class="btn" id="cart-btn" role="button" aria-label="Open Shopping Cart" aria-haspopup="dialog" aria-expanded="false">
+                        <img id="cart1" class="cart-image" src="images/cart.svg" alt="cart">
+                    </a>
+                    <span class="cart-badge" id="cart-badge" aria-live="polite">0</span>
+                    <div class="cart-dropdown" id="cart-dropdown" role="dialog" aria-label="Shopping Cart" aria-modal="false">
+                        <div class="cart-dropdown-header">
+                            <div class="cart-header-title">
+                                <span>🛒</span>
+                                <h3 data-i18n="your_cart">Your Cart</h3>
+                                <span class="cart-count-pill" id="cart-count-pill">0 items</span>
+                            </div>
+                            <button type="button" class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">&times;</button>
+                        </div>
+                        <div class="cart-dropdown-body" id="cart-dropdown-body">
+                            <!-- Items inserted dynamically by script.js -->
+                        </div>
+                        <div class="cart-dropdown-footer" id="cart-dropdown-footer">
+                            <div class="cart-subtotal-row">
+                                <span>Subtotal:</span>
+                                <span class="cart-subtotal-amount" id="cart-subtotal">&#8377;0.00</span>
+                            </div>
+                            <div class="cart-dropdown-actions">
+                                <button type="button" class="cart-action-btn cart-checkout-btn" id="cart-checkout-btn" data-i18n="checkout">Checkout</button>
+                                <button type="button" class="cart-action-btn cart-clear-btn" id="cart-clear-btn" data-i18n="clear_cart">Clear Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn" id="profile-btn" role="button" aria-label="View Profile Options"><img src="images/profile-icon.png"
+                        alt="profile" id="profile-img"> <img src="images/profile.gif" alt="profile" id="profile-gif"></a>
+                <a href="#" class="btn" id="burger-btn" role="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu"><img src="images/hamburger-menu.svg"
+                        alt="menu"></a>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <ul class="mobile-nav-links">
+                <li><a href="main.html#home" class="btn" data-i18n="nav_home">Home</a></li>
+                <li><a href="main.html#about" class="btn" data-i18n="nav_about">About</a></li>
+                <li><a href="main.html#services" class="btn" data-i18n="nav_services">Services</a></li>
+                <li><a href="main.html#contact" class="btn" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+            <img class="mobile-menu-logo" id="mobile-menu-logo" src="images/logo-name.png" alt="Hostel Hoard">
+        </div>
+    </header>
+    <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
+    <main id="main-content">
+    <div class="profile-bar">
+        <a id="current-profile" class="current-profile-info" role="button" tabindex="0" aria-haspopup="region" aria-expanded="false" title="Click to view or switch profile">Your Profile</a>
+        <div class="profile-bar-btn-wrapper">
+            <a id="profile-settings" role="button" tabindex="0" title="Settings" aria-label="Room & Preferences Settings" aria-haspopup="dialog" aria-expanded="false"><img src="./images/setting.png" alt="setting"></a>
+            <div id="settings-panel" class="profile-dropdown-panel" role="dialog" aria-label="Settings" aria-modal="false">
+                <div class="panel-header">
+                    <h3 data-i18n="settings_title">⚙️ Room & Preferences</h3>
+                    <button type="button" class="panel-close-btn" data-close="settings-panel" aria-label="Close settings">&times;</button>
+                </div>
+                <div class="panel-body">
+                    <div class="settings-group">
+                        <label for="settings-room">Assigned Hostel Room:</label>
+                        <input type="text" id="settings-room" placeholder="e.g. Block A - Room 204" autocomplete="off">
+                    </div>
+                    <div class="settings-group">
+                        <label for="settings-phone">Hostel Delivery Contact:</label>
+                        <input type="tel" id="settings-phone" placeholder="+91 98765 43210" value="+91 98765 43210" autocomplete="tel">
+                    </div>
+                    <div class="settings-group-checkbox">
+                        <input type="checkbox" id="settings-notifications" checked>
+                        <label for="settings-notifications">SMS alerts when package arrives</label>
+                    </div>
+                    <div class="settings-group-checkbox">
+                        <input type="checkbox" id="settings-autobuy">
+                        <label for="settings-autobuy">One-click instant buy enabled</label>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="panel-save-btn" id="save-settings-btn" data-i18n="save_settings">Save Settings</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-bar-btn-wrapper">
+            <a id="profile-notification" role="button" tabindex="0" title="Notifications" aria-label="Notifications" aria-haspopup="dialog" aria-expanded="false">
+                <img src="./images/bell.png" alt="notification">
+                <span id="notif-badge" class="notif-dot" aria-hidden="true"></span>
+            </a>
+            <div id="notification-panel" class="profile-dropdown-panel" role="dialog" aria-label="Notifications" aria-modal="false">
+                <div class="panel-header">
+                    <h3 data-i18n="notifs_title">🔔 Notifications</h3>
+                    <button type="button" class="panel-clear-link" id="mark-notifs-read" data-i18n="clear">Clear</button>
+                    <button type="button" class="panel-close-btn" data-close="notification-panel" aria-label="Close notifications">&times;</button>
+                </div>
+                <div class="panel-body notifs-list" id="notifs-list">
+                    <div class="notif-item unread">
+                        <div class="notif-icon" aria-hidden="true">📦</div>
+                        <div class="notif-content">
+                            <p class="notif-title">Order Out For Delivery</p>
+                            <p class="notif-text">Your Study Lamp has arrived at the hostel security gate!</p>
+                            <span class="notif-time">10 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-icon" aria-hidden="true">🏷️</div>
+                        <div class="notif-content">
+                            <p class="notif-title">Hostel Hoard Sale</p>
+                            <p class="notif-text">20% off all desk organizers and room drawers this weekend.</p>
+                            <span class="notif-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon" aria-hidden="true">📢</div>
+                        <div class="notif-content">
+                            <p class="notif-title">Hostel Notice</p>
+                            <p class="notif-text">Quiet study hours begin at 10 PM. Hoard smartly!</p>
+                            <span class="notif-time">Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="language-selector">
+            <label for="lang-select" class="language-lable" data-i18n="lang_label">Languages:</label>
+            <select id="lang-select" class="language-selector" aria-label="Select Language" onchange="changeLanguage(this.value)">
+                <option value="en" selected>English</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ar">العربية (Arabic)</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="other-profile-info" role="region" aria-label="Profile switcher">
+        <div class="bar-spacer" title="Click to close profile drawer"></div>
+        <div id="user1" class="profile-info" data-user-id="user1">
+            <img src="images/profile-icon.png" alt="Profile image" class="profile-image">
+            <div class="user-details">
+                <p class="username" id="user1-name">John Doe</p>
+                <span class="user-meta" id="user1-meta">Block A - Room 204</span>
+            </div>
+            <button type="button" class="edit-profile-btn" id="user1-action" data-user="user1">Edit</button>
+        </div>
+        <div id="user2" class="profile-info" data-user-id="user2">
+            <img src="images/profile-icon.png" alt="Profile image" class="profile-image">
+            <div class="user-details">
+                <p class="username" id="user2-name">Jane Smith</p>
+                <span class="user-meta" id="user2-meta">Block B - Room 108</span>
+            </div>
+            <button type="button" class="switch-btn" id="user2-action" data-user="user2">Switch</button>
+        </div>
+        <button type="button" class="sign-out-btn" id="sign-out-btn">Sign Out</button>
+    </div>
+
+    <section class="Your Orders" id="orders-section">
+        <h2 data-i18n="your_orders">Your Orders</h2>
+        <div class="orders-container" id="orders-container">
+            <div class="order-card">
+                <img src="images/lamp.jpg" alt="LED Study Lamp" class="order-image">
+                <h3>LED Study Lamp</h3>
+                <p>Date: 2024-10-14</p>
+                <p>Status: Delivered</p>
+            </div>
+            <div class="order-card">
+                <img src="images/desk-organizer.jpg" alt="Desk Organizer" class="order-image">
+                <h3>Desk Organizer</h3>
+                <p>Date: 2024-10-18</p>
+                <p>Status: Delivered</p>
+            </div>
+            <div class="order-card">
+                <img src="images/extension.webp" alt="Extension Board" class="order-image">
+                <h3>Extension Board</h3>
+                <p>Date: 2024-10-22</p>
+                <p>Status: In Transit</p>
+            </div>
+            <div class="order-card">
+                <img src="images/foldable-table.webp" alt="Foldable Study Table" class="order-image">
+                <h3>Foldable Study Table</h3>
+                <p>Date: 2024-10-26</p>
+                <p>Status: Processing</p>
+            </div>
+            <div class="order-card">
+                <img src="images/fridge.webp" alt="Mini Refrigerator" class="order-image">
+                <h3>Mini Refrigerator</h3>
+                <p>Date: 2024-10-27</p>
+                <p>Status: In Transit</p>
+            </div>
+            <div id="scroll-sentinel" class="sentinel">All caught up!</div>
+        </div>
+    </section>
+
+    <section id="saved-addresses" class="saved-addresses-container">
+        <div class="saved-addresses-header">
+            <h2 data-i18n="saved_addresses">Saved Addresses</h2>
+            <button type="button" class="btn" id="add-address-btn" role="button" data-i18n="add_address">+ Add Address</button>
+        </div>
+        <div id="addresses-container">
+            <!-- Dynamically populated based on active profile -->
+        </div>
+    </section>
+    </main>
+</body>
+
+</html>
