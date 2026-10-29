@@ -33,7 +33,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 Notifications",
         clear: "Clear",
         empty_cart: "Your cart is empty",
-        cart_empty_sub: "Find useful hostel essentials from the featured list!"
+        cart_empty_sub: "Find useful hostel essentials from the featured list!",
+        seller_account_note: "For creating a seller account, please contact us so we can verify you."
     },
     es: {
         nav_home: "Inicio",
@@ -68,7 +69,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 Notificaciones",
         clear: "Borrar",
         empty_cart: "Tu carrito está vacío",
-        cart_empty_sub: "¡Encuentra productos útiles para tu habitación en la lista!"
+        cart_empty_sub: "¡Encuentra productos útiles para tu habitación en la lista!",
+        seller_account_note: "Para crear una cuenta de vendedor, contáctenos para que podamos verificarlo."
     },
     fr: {
         nav_home: "Accueil",
@@ -103,7 +105,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 Notifications",
         clear: "Effacer",
         empty_cart: "Votre panier est vide",
-        cart_empty_sub: "Trouvez les essentiels de dortoir parmi nos produits !"
+        cart_empty_sub: "Trouvez les essentiels de dortoir parmi nos produits !",
+        seller_account_note: "Pour créer un compte vendeur, veuillez nous contacter afin que nous puissions vous vérifier."
     },
     de: {
         nav_home: "Startseite",
@@ -138,7 +141,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 Benachrichtigungen",
         clear: "Löschen",
         empty_cart: "Ihr Warenkorb ist leer",
-        cart_empty_sub: "Finde nützliche Wohnheim-Artikel in unserer Liste!"
+        cart_empty_sub: "Finde nützliche Wohnheim-Artikel in unserer Liste!",
+        seller_account_note: "Um ein Verkäuferkonto zu erstellen, kontaktieren Sie uns bitte, damit wir Sie verifizieren können."
     },
     hi: {
         nav_home: "होम",
@@ -173,7 +177,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 सूचनाएं",
         clear: "हटाएं",
         empty_cart: "आपकी कार्ट खाली है",
-        cart_empty_sub: "प्रमुख उत्पादों में से आवश्यक सामान चुनें!"
+        cart_empty_sub: "प्रमुख उत्पादों में से आवश्यक सामान चुनें!",
+        seller_account_note: "विक्रेता खाता बनाने के लिए, कृपया हमसे संपर्क करें ताकि हम आपका सत्यापन कर सकें।"
     },
     zh: {
         nav_home: "首页",
@@ -208,7 +213,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 通知",
         clear: "清除",
         empty_cart: "您的购物车是空的",
-        cart_empty_sub: "从推荐列表中挑选实用的宿舍好物！"
+        cart_empty_sub: "从推荐列表中挑选实用的宿舍好物！",
+        seller_account_note: "如需创建卖家账户，请联系我们以便我们进行验证。"
     },
     ar: {
         nav_home: "الرئيسية",
@@ -243,7 +249,8 @@ const TRANSLATIONS = {
         notifs_title: "🔔 الإشعارات",
         clear: "مسح",
         empty_cart: "سلتك فارغة",
-        cart_empty_sub: "اختر مستلزمات السكن المميزة من قائمتنا!"
+        cart_empty_sub: "اختر مستلزمات السكن المميزة من قائمتنا!",
+        seller_account_note: "لإنشاء حساب بائع، يرجى الاتصال بنا حتى نتمكن من التحقق من هويتك."
     }
 };
 

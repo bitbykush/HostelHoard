@@ -532,6 +532,36 @@ section:nth-child(even) .btn:hover {
     font-weight: bold;
 }
 
+.seller-note-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px dashed var(--warning-color);
+    border-radius: 8px;
+    padding: 0.65rem 1.25rem;
+    margin: 0.5rem auto 1rem auto;
+    max-width: 620px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+.seller-note-badge .seller-note-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.seller-note-badge p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--light-color) !important;
+    text-align: center;
+    line-height: 1.4;
+}
+
 .contact-info {
     display: flex;
     flex-wrap: wrap;
