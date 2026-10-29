@@ -744,6 +744,438 @@ if (cartCloseBtn) {
     });
 }
 
+/* ==========================================================================
+   Hostel Hoard - Peer-to-Peer Seller Contact & Chat Popup (Not an eCommerce checkout)
+   ========================================================================== */
+
+const PRODUCT_SELLERS = {
+    'desk-organizer': {
+        name: 'Aarav Sharma',
+        phone: '+91 98765 43210',
+        location: 'BH-3 (Boys Hostel), Room 402',
+        email: 'aarav.sharma@hostel.edu',
+        avatar: 'AS'
+    },
+    'storage-drawer': {
+        name: 'Priya Patel',
+        phone: '+91 98123 45678',
+        location: 'GH-2 (Girls Hostel), Room 215',
+        email: 'priya.patel@hostel.edu',
+        avatar: 'PP'
+    },
+    'cloth-drying-rack': {
+        name: 'Rohan Verma',
+        phone: '+91 98234 56789',
+        location: 'BH-1 (Boys Hostel), Room 108',
+        email: 'rohan.verma@hostel.edu',
+        avatar: 'RV'
+    },
+    'extension-board': {
+        name: 'Sneha Kulkarni',
+        phone: '+91 98345 67890',
+        location: 'GH-4 (Girls Hostel), Room 304',
+        email: 'sneha.k@hostel.edu',
+        avatar: 'SK'
+    },
+    'foldable-study-table': {
+        name: 'Vikram Aditya',
+        phone: '+91 98456 78901',
+        location: 'BH-2 (Boys Hostel), Room 512',
+        email: 'vikram.aditya@hostel.edu',
+        avatar: 'VA'
+    },
+    'mini-refrigerator': {
+        name: 'Kabir Mehta',
+        phone: '+91 98567 89012',
+        location: 'BH-4 (Boys Hostel), Room 320',
+        email: 'kabir.mehta@hostel.edu',
+        avatar: 'KM'
+    },
+    'clothes-hangers': {
+        name: 'Ananya Roy',
+        phone: '+91 98678 90123',
+        location: 'GH-1 (Girls Hostel), Room 114',
+        email: 'ananya.roy@hostel.edu',
+        avatar: 'AR'
+    },
+    'induction-cooktop': {
+        name: 'Devendra Rao',
+        phone: '+91 98789 01234',
+        location: 'BH-5 (Boys Hostel), Room 201',
+        email: 'devendra.rao@hostel.edu',
+        avatar: 'DR'
+    },
+    'electric-steam-iron': {
+        name: 'Tanvi Desai',
+        phone: '+91 98890 12345',
+        location: 'GH-3 (Girls Hostel), Room 408',
+        email: 'tanvi.desai@hostel.edu',
+        avatar: 'TD'
+    },
+    'electric-kettle': {
+        name: 'Kunal Kapoor',
+        phone: '+91 98901 23456',
+        location: 'BH-1 (Boys Hostel), Room 316',
+        email: 'kunal.kapoor@hostel.edu',
+        avatar: 'KK'
+    },
+    'led-study-lamp': {
+        name: 'Meera Joshi',
+        phone: '+91 98012 34567',
+        location: 'GH-2 (Girls Hostel), Room 102',
+        email: 'meera.joshi@hostel.edu',
+        avatar: 'MJ'
+    },
+    'adjustable-laptop-stand': {
+        name: 'Harshavardhan Reddy',
+        phone: '+91 98112 23344',
+        location: 'BH-3 (Boys Hostel), Room 122',
+        email: 'harsh.reddy@hostel.edu',
+        avatar: 'HR'
+    }
+};
+
+const DEFAULT_SELLER = {
+    name: 'Aman Gupta (Hostel Coordinator)',
+    phone: '+91 98765 00112',
+    location: 'BS-12, Room 1302, Campus',
+    email: 'aman.gupta@hostel.edu',
+    avatar: 'AG'
+};
+
+function getSellerForProduct(identifier) {
+    if (!identifier) return DEFAULT_SELLER;
+    const clean = identifier.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    for (const key in PRODUCT_SELLERS) {
+        if (clean.includes(key) || key.includes(clean)) {
+            return PRODUCT_SELLERS[key];
+        }
+    }
+    return DEFAULT_SELLER;
+}
+
+let activeTriggerElement = null;
+
+function ensureSellerModal() {
+    let backdrop = document.getElementById('seller-modal-backdrop');
+    if (backdrop) return backdrop;
+
+    backdrop = document.createElement('div');
+    backdrop.id = 'seller-modal-backdrop';
+    backdrop.className = 'seller-modal-backdrop';
+    backdrop.setAttribute('role', 'dialog');
+    backdrop.setAttribute('aria-modal', 'true');
+    backdrop.setAttribute('aria-labelledby', 'seller-modal-title');
+    backdrop.setAttribute('aria-hidden', 'true');
+
+    backdrop.innerHTML = `
+        <div class="seller-modal-dialog" role="document">
+            <div class="seller-modal-header">
+                <div class="seller-header-info">
+                    <div class="seller-header-avatar" id="seller-avatar-badge">AS</div>
+                    <div>
+                        <h3 id="seller-modal-title" class="seller-modal-title">Contact Seller</h3>
+                        <span class="seller-badge-sub">🤝 Hostel Peer-to-Peer Marketplace</span>
+                    </div>
+                </div>
+                <button type="button" class="seller-modal-close-btn" id="seller-modal-close" aria-label="Close seller chat dialog">&times;</button>
+            </div>
+
+            <div class="seller-item-strip" id="seller-item-strip">
+                <img src="images/logo.png" alt="Item preview" id="seller-item-img" class="seller-item-img">
+                <div class="seller-item-details">
+                    <div class="seller-item-name" id="seller-item-name">Product Name</div>
+                    <div class="seller-item-price" id="seller-item-price">&#8377;0.00</div>
+                </div>
+                <div class="seller-item-notice">
+                    <span>Direct Student Deal</span>
+                    <small>Pay in cash/UPI upon meetup</small>
+                </div>
+            </div>
+
+            <div class="seller-info-card">
+                <div class="seller-info-grid">
+                    <div class="seller-info-item">
+                        <span class="seller-info-icon" aria-hidden="true">👤</span>
+                        <div class="seller-info-text">
+                            <label>Name of Seller</label>
+                            <strong id="seller-info-name">Seller Name</strong>
+                        </div>
+                    </div>
+                    <div class="seller-info-item">
+                        <span class="seller-info-icon" aria-hidden="true">📞</span>
+                        <div class="seller-info-text">
+                            <label>Number of Seller</label>
+                            <a href="tel:+919876543210" id="seller-info-phone" class="seller-contact-link">+91 98765 43210</a>
+                        </div>
+                    </div>
+                    <div class="seller-info-item">
+                        <span class="seller-info-icon" aria-hidden="true">📍</span>
+                        <div class="seller-info-text">
+                            <label>Location of Seller</label>
+                            <span id="seller-info-location">Hostel Block & Room</span>
+                        </div>
+                    </div>
+                    <div class="seller-info-item">
+                        <span class="seller-info-icon" aria-hidden="true">✉️</span>
+                        <div class="seller-info-text">
+                            <label>Email of Seller</label>
+                            <a href="mailto:seller@hostel.edu" id="seller-info-email" class="seller-contact-link">seller@hostel.edu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seller-chat-window">
+                <div class="seller-chat-header">
+                    <div class="seller-status-indicator">
+                        <span class="seller-online-dot"></span>
+                        <span id="seller-chat-status">Active on campus &bull; Typically replies quickly</span>
+                    </div>
+                    <div class="seller-quick-actions">
+                        <a href="#" id="seller-quick-call" class="seller-pill-btn">📞 Call</a>
+                        <a href="#" id="seller-quick-wa" class="seller-pill-btn" target="_blank" rel="noopener">💬 WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="seller-chat-messages" id="seller-chat-messages" aria-live="polite">
+                    <!-- Message bubbles inserted dynamically -->
+                </div>
+
+                <div class="seller-chat-chips" id="seller-chat-chips">
+                    <button type="button" class="seller-chip" data-msg="Hi! Is this item still available?">Is this still available?</button>
+                    <button type="button" class="seller-chip" data-msg="Can I come by your room to inspect it today?">Can I inspect today?</button>
+                    <button type="button" class="seller-chip" data-msg="Is the asking price slightly negotiable?">Price negotiable?</button>
+                    <button type="button" class="seller-chip" data-msg="Can we meet at the hostel mess / entrance?">Meet at mess?</button>
+                </div>
+
+                <form class="seller-chat-input-bar" id="seller-chat-form">
+                    <input type="text" id="seller-chat-input" class="seller-chat-input" placeholder="Type a message to the seller..." autocomplete="off">
+                    <button type="submit" class="seller-chat-send-btn" id="seller-chat-send" aria-label="Send message to seller">
+                        <span>Send</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(backdrop);
+
+    // Event listeners for closing
+    const closeBtn = backdrop.querySelector('#seller-modal-close');
+    closeBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeSellerChatModal();
+    });
+
+    backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+            closeSellerChatModal();
+        }
+    });
+
+    // Chat form submit
+    const chatForm = backdrop.querySelector('#seller-chat-form');
+    const chatInput = backdrop.querySelector('#seller-chat-input');
+    chatForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        sendUserChatMessage(msg);
+        chatInput.value = '';
+        chatInput.focus();
+    });
+
+    // Suggestion chips
+    const chips = backdrop.querySelectorAll('.seller-chip');
+    chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+            const msg = chip.getAttribute('data-msg');
+            if (msg) {
+                sendUserChatMessage(msg);
+            }
+        });
+    });
+
+    return backdrop;
+}
+
+function openSellerChatModal(item, triggerBtn = null) {
+    activeTriggerElement = triggerBtn;
+    const backdrop = ensureSellerModal();
+
+    const seller = getSellerForProduct(item.id || item.name);
+    const rawPhoneDigits = seller.phone.replace(/[^0-9]/g, '');
+
+    // Populate Seller info
+    const nameEl = document.getElementById('seller-info-name');
+    const phoneEl = document.getElementById('seller-info-phone');
+    const locEl = document.getElementById('seller-info-location');
+    const emailEl = document.getElementById('seller-info-email');
+    const avatarEl = document.getElementById('seller-avatar-badge');
+    const titleEl = document.getElementById('seller-modal-title');
+    const quickCall = document.getElementById('seller-quick-call');
+    const quickWa = document.getElementById('seller-quick-wa');
+
+    if (nameEl) nameEl.textContent = seller.name;
+    if (phoneEl) {
+        phoneEl.textContent = seller.phone;
+        phoneEl.href = `tel:${seller.phone.replace(/\s+/g, '')}`;
+    }
+    if (locEl) locEl.textContent = seller.location;
+    if (emailEl) {
+        emailEl.textContent = seller.email;
+        emailEl.href = `mailto:${seller.email}?subject=${encodeURIComponent('Hostel Hoard Inquiry: ' + (item.name || 'Item'))}`;
+    }
+    if (avatarEl) avatarEl.textContent = seller.avatar || 'SE';
+    if (titleEl) titleEl.textContent = `Chat with ${seller.name.split(' ')[0]}`;
+
+    if (quickCall) quickCall.href = `tel:${seller.phone.replace(/\s+/g, '')}`;
+    if (quickWa) quickWa.href = `https://wa.me/${rawPhoneDigits}?text=${encodeURIComponent('Hi ' + seller.name + ', I saw your listing for "' + (item.name || 'Item') + '" on Hostel Hoard. Is it still available?')}`;
+
+    // Item strip
+    const itemImg = document.getElementById('seller-item-img');
+    const itemName = document.getElementById('seller-item-name');
+    const itemPrice = document.getElementById('seller-item-price');
+
+    if (itemImg) itemImg.src = item.img || 'images/logo.png';
+    if (itemName) itemName.textContent = item.name || 'Hostel Item';
+    if (itemPrice) itemPrice.innerHTML = `&#8377;${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}`;
+
+    // Initial Chat messages
+    const chatContainer = document.getElementById('seller-chat-messages');
+    if (chatContainer) {
+        chatContainer.innerHTML = `
+            <div class="chat-system-pill">
+                🤝 Direct peer chat &bull; No online checkout fees &bull; Meet in person at ${seller.location} to inspect and pay via UPI or Cash.
+            </div>
+            <div class="chat-bubble chat-bubble-incoming">
+                <div>Hey there! 👋 Thanks for reaching out about the <strong>${item.name || 'item'}</strong>. It's in great condition and available in my room (<strong>${seller.location}</strong>). When would you like to drop by?</div>
+                <div class="chat-bubble-meta">Just now</div>
+            </div>
+        `;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Input placeholder customized
+    const chatInput = document.getElementById('seller-chat-input');
+    if (chatInput) {
+        chatInput.placeholder = `Message ${seller.name.split(' ')[0]}...`;
+        chatInput.value = '';
+    }
+
+    // Display modal
+    backdrop.classList.add('active');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('seller-modal-open');
+
+    setTimeout(() => {
+        chatInput?.focus();
+    }, 150);
+}
+
+function openSellerChatForCart(cart, total) {
+    if (!cart || cart.length === 0) return;
+    const firstItem = cart[0];
+    const seller = getSellerForProduct(firstItem.id || firstItem.name);
+    const itemNames = cart.map((i) => `${i.name} (x${i.quantity})`).join(', ');
+
+    openSellerChatModal(
+        {
+            id: firstItem.id,
+            name: cart.length === 1 ? firstItem.name : `Cart Items (${cart.length}): ${itemNames}`,
+            price: total,
+            img: firstItem.img || 'images/cart.svg'
+        },
+        document.getElementById('cart-checkout-btn')
+    );
+
+    // Customize the initial message for cart checkout
+    const chatContainer = document.getElementById('seller-chat-messages');
+    if (chatContainer) {
+        chatContainer.innerHTML = `
+            <div class="chat-system-pill">
+                🎒 Cart Inquiry for ${cart.length} item${cart.length > 1 ? 's' : ''} &bull; Total: &#8377;${total.toFixed(2)}. Direct student exchange!
+            </div>
+            <div class="chat-bubble chat-bubble-incoming">
+                <div>Hey! 👋 I see your inquiry for <strong>${itemNames}</strong>. Since Hostel Hoard connects campus peers directly, let me know when you're free to meet up at <strong>${seller.location}</strong> or the hostel common room!</div>
+                <div class="chat-bubble-meta">Just now</div>
+            </div>
+        `;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+}
+
+function closeSellerChatModal() {
+    const backdrop = document.getElementById('seller-modal-backdrop');
+    if (!backdrop) return;
+    backdrop.classList.remove('active');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('seller-modal-open');
+
+    if (activeTriggerElement && typeof activeTriggerElement.focus === 'function') {
+        activeTriggerElement.focus();
+    }
+}
+
+function isSellerModalOpen() {
+    const backdrop = document.getElementById('seller-modal-backdrop');
+    return backdrop && backdrop.classList.contains('active');
+}
+
+function sendUserChatMessage(text) {
+    const chatContainer = document.getElementById('seller-chat-messages');
+    if (!chatContainer || !text) return;
+
+    // Append outgoing message
+    const outBubble = document.createElement('div');
+    outBubble.className = 'chat-bubble chat-bubble-outgoing';
+    outBubble.innerHTML = `
+        <div class="bubble-content"></div>
+        <div class="chat-bubble-meta">Just now &bull; Sent ✓✓</div>
+    `;
+    outBubble.querySelector('.bubble-content').textContent = text;
+    chatContainer.appendChild(outBubble);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // Simulated typing and realistic peer reply
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'chat-typing-indicator';
+    typingIndicator.id = 'seller-typing';
+    typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+    chatContainer.appendChild(typingIndicator);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    setTimeout(() => {
+        typingIndicator.remove();
+        const inBubble = document.createElement('div');
+        inBubble.className = 'chat-bubble chat-bubble-incoming';
+
+        // Contextual responses based on message
+        const lower = text.toLowerCase();
+        let reply = "Sounds good! I'm in my room right now. Feel free to come over or give me a call at my number above when you're on the way!";
+        if (lower.includes('available') || lower.includes('still')) {
+            reply = "Yes, absolutely! It's still available. Nobody else has claimed it yet, so it's yours if you want it.";
+        } else if (lower.includes('price') || lower.includes('discount') || lower.includes('negotiable')) {
+            reply = "I've already marked it down quite a bit, but if you can come pick it up today, I'm happy to give a small student discount!";
+        } else if (lower.includes('inspect') || lower.includes('today') || lower.includes('tonight') || lower.includes('when')) {
+            reply = "Today works great for me! Anytime after 5 PM or during dinner hours. You're welcome to test and inspect it properly before taking it.";
+        } else if (lower.includes('mess') || lower.includes('gate') || lower.includes('meet')) {
+            reply = "Sure, we can definitely meet right outside the hostel mess or block entrance if that's more convenient for you!";
+        }
+
+        inBubble.innerHTML = `
+            <div>${reply}</div>
+            <div class="chat-bubble-meta">Just now</div>
+        `;
+        chatContainer.appendChild(inBubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 1000);
+}
 
 document.addEventListener('click', (e) => {
     const target = e.target;
@@ -790,10 +1222,8 @@ document.addEventListener('click', (e) => {
             return;
         }
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        clearCart();
         toggleCartDropdown(false);
-        cartBtn?.focus();
-        showToast(`🎉 Order confirmed! Total: ₹${total.toFixed(2)}. Check your hostel room soon!`);
+        openSellerChatForCart(cart, total);
         return;
     }
 
@@ -808,9 +1238,15 @@ document.addEventListener('click', (e) => {
 
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && cartDropdown && cartDropdown.classList.contains('active')) {
-        toggleCartDropdown(false);
-        cartBtn?.focus();
+    if (e.key === 'Escape') {
+        if (typeof isSellerModalOpen === 'function' && isSellerModalOpen()) {
+            closeSellerChatModal();
+            return;
+        }
+        if (cartDropdown && cartDropdown.classList.contains('active')) {
+            toggleCartDropdown(false);
+            cartBtn?.focus();
+        }
     }
 });
 
@@ -862,33 +1298,10 @@ productCards.forEach((card, index) => {
                     const match = priceEl.textContent.match(/[0-9]+(\.[0-9]+)?/);
                     if (match) price = parseFloat(match[0]);
                 }
+                const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-                
-                const profiles = getProfiles();
-                const activeId = getActiveProfileId();
-                const activeProfile = profiles[activeId] || profiles.user1;
-                if (!activeProfile.orders) activeProfile.orders = [];
-
-                const today = new Date().toISOString().split('T')[0];
-                activeProfile.orders.unshift({
-                    name: name,
-                    date: today,
-                    status: 'Processing (Room Delivery)',
-                    img: img
-                });
-                saveProfiles(profiles);
-
-                
-                const originalText = btn.textContent;
-                btn.textContent = 'Purchased! ⚡';
-                btn.style.backgroundColor = '#2a9d8f';
-                setTimeout(() => {
-                    const currentLang = getCurrentLanguage();
-                    btn.textContent = TRANSLATIONS[currentLang]?.buy_now || originalText;
-                    btn.style.backgroundColor = '';
-                }, 1400);
-
-                showToast(`⚡ Instant Purchase: "${name}" for ₹${price.toFixed(2)}! Order placed.`);
+                // Peer-to-peer student exchange: Open Seller Contact & Chat popup instead of buying
+                openSellerChatModal({ id, name, img, price }, btn);
             });
         }
     });
@@ -1430,6 +1843,10 @@ document.addEventListener('keydown', (e) => {
 
     
     if (e.key === 'Escape') {
+        if (typeof isSellerModalOpen === 'function' && isSellerModalOpen()) {
+            closeSellerChatModal();
+            return;
+        }
         if (cartDropdown && cartDropdown.classList.contains('active')) {
             toggleCartDropdown(false);
             cartBtn?.focus();
@@ -1539,4 +1956,5 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(savedLang);
     updateCartUI();
     renderProfilePage();
+    ensureSellerModal();
 });
